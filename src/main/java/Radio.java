@@ -1,6 +1,19 @@
 public class Radio {
-    private int currentStation;                                   // текущая радиостанция
-    private int currentVolume;                                   // Текущая громкость
+    private int numberOfRadioStation = 10;
+    private int maxRadioStation = numberOfRadioStation - 1;
+    private int minRadioStation = 0;
+    private int currentStation;
+
+    public Radio(int numberOfRadioStation) {
+        this.maxRadioStation = numberOfRadioStation - 1;
+
+    }
+
+    public Radio() {
+
+    }
+
+    private int currentVolume;
 
     public int getCurrentStation() {
         return currentStation;
@@ -10,37 +23,37 @@ public class Radio {
         return currentVolume;
     }
 
-    public void setCurrentStation(int newCurrentStation) {      // Выбор радиостанции
-        if (newCurrentStation > 9) {
+    public void setCurrentStation(int newCurrentStation) {
+        if (newCurrentStation > maxRadioStation) {
             return;
         }
-        if (newCurrentStation < 0) {
+        if (newCurrentStation < minRadioStation) {
             return;
         }
         currentStation = newCurrentStation;
     }
 
-    public void setCurrentVolume(int newCurrentVolume) {      // Выбор громкости
+    public void setCurrentVolume(int newCurrentVolume) {
         currentVolume = newCurrentVolume;
     }
 
-    public void nextRadioStation() {                         // Следующая радиостанция
-        if (currentStation < 9) {
+    public void nextRadioStation() {
+        if (currentStation < maxRadioStation) {
             currentStation = currentStation + 1;
         } else {
-            currentStation = 0;
+            currentStation = minRadioStation;
         }
     }
 
-    public void prevRadioStation() {                        // Предыдущая радиостанция
-        if (currentStation > 0) {
+    public void prevRadioStation() {
+        if (currentStation > minRadioStation) {
             currentStation = currentStation - 1;
         } else {
-            currentStation = 9;
+            currentStation = maxRadioStation;
         }
     }
 
-    public void increaseVolume() {                         // Прибавление громкости
+    public void increaseVolume() {
         if (currentVolume < 100) {
             currentVolume = currentVolume + 1;
         } else {
@@ -48,7 +61,7 @@ public class Radio {
         }
     }
 
-    public void reduceVolume() {                          // Понижение громкости
+    public void reduceVolume() {
         if (currentVolume > 0) {
             currentVolume = currentVolume - 1;
         } else {
